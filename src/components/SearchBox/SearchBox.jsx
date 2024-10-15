@@ -1,5 +1,15 @@
 import styles from './SearchBox.module.css';
-export default function SearchBox({ filter, onFilterChange }) {
+import { useSelector, useDispatch } from 'react-redux';
+import { selectNameFilter, setFilter } from '../../redux/filtersSlice';
+
+export default function SearchBox() {
+
+    const filter = useSelector(selectNameFilter);
+
+    const dispatch = useDispatch();
+    const handleFilterChange = (e) => {
+    dispatch(setFilter(e.target.value));
+  };
 
     return (
         <div className={styles.filter}>
@@ -10,7 +20,7 @@ export default function SearchBox({ filter, onFilterChange }) {
             
             
             value={filter}
-            onChange={e => onFilterChange(e.target.value)}
+            onChange={e => handleFilterChange(e.target.value)}
     />
         </div>
     )
